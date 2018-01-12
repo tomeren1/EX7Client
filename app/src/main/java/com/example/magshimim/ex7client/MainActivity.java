@@ -38,9 +38,24 @@ public class MainActivity extends Activity {
 
                 break;
             case R.id.buttonSurf:
+                String url = ((EditText)findViewById(R.id.surf)).getText().toString();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                break;
+            case R.id.buttonEMail:
+                String sendTo = ((EditText)findViewById(R.id.eMail)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/html");
+                intent.putExtra(Intent.EXTRA_EMAIL,new String[] {sendTo});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+
+                startActivity(Intent.createChooser(intent, "Send Email"));
                 break;
         }
     }
+    @SuppressWarnings({"MissingPermission"})
     private void callPhone(String phoneNumber)
     {
 
@@ -49,6 +64,16 @@ public class MainActivity extends Activity {
         startActivity(surf);
 
     }
+
+  /*  private void surfPhone(String url)
+    {
+
+        Uri address = Uri.parse(url);
+        Intent surf = new Intent(Intent.ACTION_VIEW, address);
+        startActivity(surf);
+
+    }*/
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
