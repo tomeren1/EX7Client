@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private final int MY_CALL_REQUEST=1;
+    private final int REG_REQ=5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,10 @@ public class MainActivity extends Activity {
                 intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
 
                 startActivity(Intent.createChooser(intent, "Send Email"));
+                break;
+            case R.id.buttonRegister:
+                Intent reg = new Intent("com.EX7.action.Register");
+                startActivityForResult(reg,REG_REQ);
                 break;
         }
     }
